@@ -1,0 +1,38 @@
+<script src="lua-string-decode.bundle.js"></script>
+<input type="file" id="file-input">
+<script>
+    /** @link https://stackoverflow.com/questions/13405129/javascript-create-and-save-file/30832210#30832210 */
+    function download(data, filename) {
+        var file = new Blob([data]);
+        if (window.navigator.msSaveOrOpenBlob) {// IE10+
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        } else { // Others
+            var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+
+    /** @link https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript/26298948#26298948 */
+    function readSingleFile(e) {
+        var file = e.target.files[0];
+        if (!file) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var contents = e.target.result;
+            download(LuaStringDecode.decode(contents), file.name + '.decoded.lua')
+        };
+        reader.readAsText(file);
+    }
+
+    document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+</script>

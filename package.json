@@ -1,0 +1,22 @@
+{
+  "name": "lua-decode",
+  "version": "1.0.0",
+  "description": "decode lua byte string into utf-8 encoding string",
+  "main": "main.js",
+  "repository": "https://github.com/ganlvtech/lua-string-decode",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Ganlv",
+  "license": "MIT",
+  "dependencies": {
+    "lua-fmt": "^2.6.0",
+    "luaparse": "git://github.com/oxyc/luaparse.git#ea86e09bf64358b34aae987b5999b6ff5d64a487",
+    "utf8": "^3.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
+}
